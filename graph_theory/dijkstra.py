@@ -1,40 +1,40 @@
-from general import reconstructPath
+from heapq import heappop, heappush
 
 
-# single source shortest path algorithm
-def dijkstra(graph, start, end):
+def dijkstra_matrix(g, source):
+    queue = [(0, source)]
+    cDist = {source: 0}
     visited = set()
-    path = {}
-    distances = {}
-    prioriyQueue = {}
-    for node in graph:
-        distances[node] = float("inf")
-    distances[start] = 0
-    prioriyQueue[start] = distances[start]
-    while prioriyQueue:
-        prioriyQueue = dict(sorted(prioriyQueue.items(), key=lambda item: item[1]))
-        node = next(iter(prioriyQueue))
-        prioriyQueue.pop(node)
+    while queue:
+        dist, node = heappop(queue)
+        if node in visited:
+            continue
         visited.add(node)
-        for neighbour in graph[node]:
+        for neighbour, weight in g[node]:
             if neighbour not in visited:
-                newDistance = distances[node] + graph[node][neighbour]
-                if newDistance < distances[neighbour]:
-                    distances[neighbour] = newDistance
-                    prioriyQueue[neighbour] = distances[neighbour]
-                    path[neighbour] = node
-        if node == end:
-            # stop early after updating nodes connected to end
-            # optional: stop early before updating nodes connected to end
-            break
-    return distances, reconstructPath(path, start, end)
+                if neighbour not in cDist or dist + weight < cDist[neighbour]:
+                    heappush(queue, (dist + weight, neighbour))
+                    cDist[neighbour] = dist + weight
+    return cDist
 
 
-weightedGraph = {
-    "S": {"T": 10, "Y": 5},
-    "T": {"X": 1, "Y": 2},
-    "X": {"Z": 4},
-    "Y": {"T": 3, "X": 9, "Z": 2},
-    "Z": {"S": 7, "X": 6},
-}
-print(dijkstra(weightedGraph, "S", "Z"))
+def edgeListToAdjacencyList(edges, n):
+    # labels the nodes from 0 to n-1
+    # given that the nodes are labeled from 1 to n
+    for edge in edges:
+        edge[0] -= 1
+        edge[1] -= 1
+    # print(edges)
+    g = [[] for _ in range(n)]
+    for edge in edges:
+        g[edge[0]].append((edge[1], edge[2]))
+    return g
+
+
+n = 3
+times = [[1, 2, 1], [2, 3, 2], [1, 3, 1]]
+g = edgeListToAdjacencyList(times, n)
+print(g)
+k = 2
+source = k - 1
+result = dijkstra_matrix(g, source)

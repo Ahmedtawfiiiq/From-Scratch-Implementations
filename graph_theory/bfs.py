@@ -13,15 +13,16 @@ def bfs(graph, start, end, filter=None):
         order.append(parent)
         if parent == end:
             break
-        # children = graph[parent]  # find neighbours if adjacency list
-        children = findNeighbours(graph, parent, filter)  # find neighbours if grid
+        children = graph[parent]  # find neighbours if adjacency list
+        # children = findNeighbours(graph, parent, filter)  # find neighbours if grid
         for child in children:
             if child not in visited:
                 queue.append(child)
                 visited.add(child)
                 parentMap[child] = parent
     # print()
-    return order, reconstructPath(parentMap, start, end)
+    # return order
+    return reconstructPath(parentMap, start, end)
 
 
 g = {"5": ["3", "7"], "3": ["2", "4"], "7": ["8"], "2": [], "4": ["8"], "8": []}
@@ -35,5 +36,5 @@ dungeon = [
     [".", ".", "#", "#", ".", ".", "."],
     ["#", ".", "#", "E", ".", "#", "."],
 ]  # start = (0, 0), end = (4, 3)
-order, path = bfs(dungeon, (0, 0), (4, 3), filter="#")
-print(path)
+# order, path = bfs(dungeon, (0, 0), (4, 3), filter="#")
+# print(path)
