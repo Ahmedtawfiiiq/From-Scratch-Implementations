@@ -31,16 +31,6 @@ def findNeighbours(graph, node, filter=None):
     return neighbours
 
 
-def graphMatrixToAdjacencyList(graph):
-    g = {}
-    for i in range(len(graph)):
-        g[str(i)] = []
-        for j in range(len(graph[0])):
-            if graph[i][j] == 1:
-                g[str(i)].append(str(j))
-    return g
-
-
 def directed_to_undirected(graph):
     # if there is an edge from a to b, add an edge from b to a
     for node in graph:
@@ -48,6 +38,63 @@ def directed_to_undirected(graph):
             if node not in graph[neighbour]:
                 graph[neighbour].append(node)
     return graph
+
+
+# for unwieghted graphs
+def adjacencyMatrixToAdjacencyList(adjacencyMatrix):
+    g = {}
+    for i in range(len(adjacencyMatrix)):
+        g[str(i)] = []
+        for j in range(len(adjacencyMatrix[0])):
+            if adjacencyMatrix[i][j] == 1:
+                g[str(i)].append(str(j))
+    return g
+
+
+# for unwieghted graphs
+def adjacencyListToAdjacencyMatrix(adjacencyList):
+    n = len(adjacencyList)
+    adjacencyMatrix = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        for j in adjacencyList[str(i)]:
+            adjacencyMatrix[i][int(j)] = 1
+    return adjacencyMatrix
+
+
+# for weighted graphs
+def weightedAdjacencyListToAdjacencyMatrix(adjacencyList):
+    n = len(adjacencyList)
+    adjacencyMatrix = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        node = str(i)
+        for neighbour in adjacencyList[node]:
+            if adjacencyList[node][neighbour] == 0:
+                adjacencyMatrix[i][int(neighbour)] = 0.1
+            else:
+                adjacencyMatrix[i][int(neighbour)] = adjacencyList[node][neighbour]
+    return adjacencyMatrix
+
+
+# for weighted graphs
+def weightedAdjacencyMatrixToAdjacencyList(adjacencyMatrix):
+    n = len(adjacencyMatrix)
+    adjacencyList = {}
+    for i in range(n):
+        adjacencyList[str(i)] = {}
+        for j in range(n):
+            if adjacencyMatrix[i][j] != 0:
+                adjacencyList[str(i)][str(j)] = adjacencyMatrix[i][j]
+    return adjacencyList
+
+
+# function to convert adjacency list to list of edges
+# where each edge is represented by a tuple (destination ,weight)
+def adjacencyListToTuplesList(adjacencyList):
+    edges = [[] for _ in range(len(adjacencyList))]
+    for node in adjacencyList:
+        for neighbour in adjacencyList[node]:
+            edges[int(node)].append((int(neighbour), adjacencyList[node][neighbour]))
+    return edges
 
 
 # import os
