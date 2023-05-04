@@ -1,12 +1,3 @@
-# get path of graph_theory/graphs.py and import function longestPath
-# while graph_theory folder is in a different folder
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "graph_theory"))
-from graphs import longestPath
-
-
 # convert an integer sequence to a directed acyclic graph
 # to find the longest increasing subsequence
 def sequence_to_dag(l):
@@ -25,13 +16,6 @@ def sequence_to_dag(l):
         if l[i] not in g:
             g[l[i]] = {}
     return g
-
-
-# not working for all cases
-# l = [1, 3, 6, 7, 9, 4, 10, 5, 6]
-# need some fix to make it work expected output is 6
-def length_of_lis(l):
-    return max(longestPath(sequence_to_dag(l)).values()) + 1
 
 
 def longestIncreasingSubsequence(l):

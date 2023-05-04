@@ -9,7 +9,7 @@ def bfs(graph, start, end, filter=None):
     queue = [start]
     visited.add(start)
     while queue:
-        parent = queue.pop(0)
+        parent = queue.pop(0)  # first out
         order.append(parent)
         if parent == end:
             break
@@ -17,7 +17,7 @@ def bfs(graph, start, end, filter=None):
         # children = findNeighbours(graph, parent, filter)  # find neighbours if grid
         for child in children:
             if child not in visited:
-                queue.append(child)
+                queue.append(child)  # first in
                 visited.add(child)
                 parentMap[child] = parent
     # print()

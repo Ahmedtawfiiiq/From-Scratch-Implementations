@@ -2,7 +2,7 @@ from topologicalSort import topologicalSortDFS
 from general import reconstructPath
 
 ##################################################################
-# not testing (may be not working)
+# not tested (may be not working)
 ##################################################################
 
 
@@ -34,10 +34,11 @@ g = {
     "5": {"4": 1},
     "6": {"4": 2, "5": 3},
 }
+# print(topologicalSortDFS(g))
 p, dist = singleSourceShortestPath(g, "6")
-print(dist)
+print(list(dist.values()))
+# print(dist)
 # sorted_dist = dict(sorted(dist.items()))
-print(dist.values())
 
 
 # # on a directed acyclic graph

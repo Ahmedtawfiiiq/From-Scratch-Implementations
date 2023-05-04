@@ -19,7 +19,7 @@ def cycleDetection_dfs(graph, node, visited, recursionStack):
         elif neighbour in recursionStack:
             return True
     recursionStack.remove(node)
-    return False
+    return False 
 
 
 g = {
@@ -32,7 +32,7 @@ g = {
     "7": ["5"],
     "8": ["9"],
     "9": ["10"],
-    "10": ["8"],
+    "10": [],
 }
 
 print(isCyclic(g))

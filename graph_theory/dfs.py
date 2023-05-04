@@ -1,3 +1,6 @@
+from general import reconstructPath
+
+
 def dfs(graph, node, visited=set(), order=[]):
     order.append(node)
     visited.add(node)
@@ -7,23 +10,28 @@ def dfs(graph, node, visited=set(), order=[]):
     return order
 
 
-def dfs_stack(g, src):
+def dfs_stack(g, src, end):
     order = []
+    parentMap = {}
     visited = set()
     stack = [src]
     visited.add(src)
     while stack:
         node = stack.pop(-1)  # first out
         order.append(node)
+        if node == end:
+            break
         children = g[node]
         for child in children:
             if child not in visited:
                 stack.append(child)  # last in
                 visited.add(child)
-    return order
+                parentMap[child] = node
+    return reconstructPath(parentMap, src, end)
 
 
 # function to find all paths between two nodes in a graph
+# may be useful (not used yet)
 def findPaths(graph, src, dst, path=[]):
     path = path + [src]
     if src == dst:

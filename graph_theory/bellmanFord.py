@@ -1,5 +1,5 @@
 # single source shortest path algorithm
-def bellmanFord(graph, start, end=None, showImpactOfNegativeCycles=False):
+def bellmanFord(graph, start, showImpactOfNegativeCycles=False):
     distances = {}
     path = {}
     for node in graph:

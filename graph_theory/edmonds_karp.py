@@ -1,5 +1,5 @@
 import numpy as np
-from dfs import dfs_stack
+from bfs import bfs
 from general import weightedAdjacencyMatrixToAdjacencyList
 
 
@@ -17,13 +17,13 @@ def toResidualGraph(graph):
     return residualMatrix
 
 
-def fordFulkerson(graph, src, dst):
+def edmondsKarp(graph, src, dst):
     while True:
         residualMatrix = toResidualGraph(graph)
         residualList = weightedAdjacencyMatrixToAdjacencyList(residualMatrix)
-        path = dfs_stack(
+        path = bfs(
             residualList, str(src), str(dst)
-        )  # find all paths from src to dst
+        )  # find shortest path from src to dst
         if not path:
             break
         print(path)
@@ -56,14 +56,14 @@ def fordFulkerson(graph, src, dst):
 #     5: {},
 # }
 
-g = {
-    0: {1: [0, 10], 3: [0, 10]},
-    1: {2: [0, 4], 3: [0, 2], 4: [0, 8]},
-    2: {5: [0, 10]},
-    3: {4: [0, 9]},
-    4: {2: [0, 6], 5: [0, 10]},
-    5: {},
-}
+# g = {
+#     0: {1: [0, 10], 3: [0, 10]},
+#     1: {2: [0, 4], 3: [0, 2], 4: [0, 8]},
+#     2: {5: [0, 10]},
+#     3: {4: [0, 9]},
+#     4: {2: [0, 6], 5: [0, 10]},
+#     5: {},
+# }
 
 # g = {
 #     0: {1: [0, 4], 2: [0, 3]},
@@ -72,14 +72,13 @@ g = {
 #     3: {},
 # }
 
-# g = {
-#     0: {1: [0, 8], 4: [0, 3]},
-#     1: {2: [0, 9]},
-#     2: {5: [0, 2]},
-#     3: {5: [0, 5]},
-#     4: {2: [0, 7], 3: [0, 4]},
-#     5: {},
-# }
+g = {
+    0: {1: [0, 8], 4: [0, 3]},
+    1: {2: [0, 9]},
+    2: {5: [0, 2]},
+    3: {5: [0, 5]},
+    4: {2: [0, 7], 3: [0, 4]},
+    5: {},
+}
 
-
-print("max-flow:", fordFulkerson(g, 0, len(g) - 1))
+print("max-flow:", edmondsKarp(g, 0, len(g) - 1))
