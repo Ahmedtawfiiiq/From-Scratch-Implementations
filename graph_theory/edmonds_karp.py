@@ -1,6 +1,6 @@
 import numpy as np
 from bfs import bfs
-from general import weightedAdjacencyMatrixToAdjacencyList
+from graph_theory.Ageneral import weightedAdjacencyMatrixToAdjacencyList
 
 
 def toResidualGraph(graph):

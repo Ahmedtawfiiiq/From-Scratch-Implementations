@@ -1,4 +1,4 @@
-from general import graphMatrixToAdjacencyList, directed_to_undirected
+from graph_theory.Ageneral import graphMatrixToAdjacencyList, directed_to_undirected
 
 
 def dfs(graph, node, visited, connectedComponents=1, components=None):

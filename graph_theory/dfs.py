@@ -1,4 +1,4 @@
-from general import reconstructPath
+from graph_theory.Ageneral import reconstructPath
 
 
 def dfs(graph, node, visited=set(), order=[]):

@@ -1,4 +1,4 @@
-from general import reconstructPath, findNeighbours
+from graph_theory.Ageneral import reconstructPath, findNeighbours
 
 
 # find shortest path from start to end

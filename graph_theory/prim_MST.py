@@ -1,5 +1,5 @@
 from heapq import heappop, heappush
-from general import adjacencyListToTuplesList, directed_to_undirected
+from graph_theory.Ageneral import adjacencyListToTuplesList, directed_to_undirected
 
 
 def primTupleList(tupleList):

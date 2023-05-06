@@ -21,7 +21,7 @@ def tab_fib(n):
     for i in range(n):
         table[i + 1] += table[i]
         if i + 1 < n:
-            table[i + 2] += table[i]
+            table[i + 2] += table[i] 
     return table[n]
 
 

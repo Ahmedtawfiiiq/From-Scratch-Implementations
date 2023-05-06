@@ -1,44 +1,3 @@
-# convert an integer sequence to a directed acyclic graph
-# to find the longest increasing subsequence
-def sequence_to_dag(l):
-    g = {}
-    for i in range(len(l)):
-        for j in range(i + 1, len(l)):
-            if l[j] > l[i]:
-                neighbour = {}
-                neighbour[l[j]] = 1
-                # add neighbour as a new edge to the node i
-                if l[i] in g:
-                    g[l[i]].update(neighbour)
-                else:
-                    g[l[i]] = neighbour
-        # if node i has no neighbours, add it to the graph
-        if l[i] not in g:
-            g[l[i]] = {}
-    return g
-
-
-def longestIncreasingSubsequence(l):
-    table = [1] * len(l)
-    prev = [None] * len(l)
-    for i in range(1, len(l)):
-        for j in range(i):
-            if l[j] < l[i] and table[j] + 1 > table[i]:
-                table[i] = table[j] + 1
-                prev[i] = j
-    max_index = table.index(max(table))
-    lis = []
-    while max_index is not None:
-        lis.append(l[max_index])
-        max_index = prev[max_index]
-    lis.reverse()
-    return lis, max(table)
-    # table = [1] * len(l)
-    # for i in range(1, len(l)):
-    #     subproblems = [table[k] for k in range(i) if l[k] < l[i]]
-    #     table[i] = max(subproblems, default=0) + 1  # if subproblems is empty, return 0
-    # return max(table, default=0)  # if table is empty, return 0
-
 
 # assume that the boxes cannot be rotated at any point during the process of stacking
 def boxStacking(boxes):
@@ -88,11 +47,6 @@ def boxes_to_dag(boxes):
     return g
 
 
-l = [3, 1, 8, 2, 5]
-# find the longest increasing subsequence
-# print(length_of_lis(l))
-
-# print(longestIncreasingSubsequence(l))
 
 
 # boxes = [(2, 3, 3), (2, 2, 4), (4, 4, 2)]

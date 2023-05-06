@@ -1,5 +1,5 @@
 from topologicalSort import topologicalSortDFS
-from general import reconstructPath
+from graph_theory.Ageneral import reconstructPath
 
 ##################################################################
 # not tested (may be not working)
