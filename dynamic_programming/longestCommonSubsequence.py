@@ -47,7 +47,7 @@ def LCS_suffixes(A, B):
                 dp[i][j] = 1 + dp[i + 1][j + 1]
             else:
                 dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
-    return dp.astype(int), int(dp[0][0])
+    return dp.astype(int)
 
 
 def findSubsequence(dp, A):
@@ -73,15 +73,15 @@ s2 = "their"
 s1 = "habit"
 # s1 = "bdcaba"
 # s2 = "abcbdab"
-# dp, l = LCS_suffixes(s1, s2)
+dp = LCS_suffixes(s1, s2)
 # print(l)
 # print(dp)
-# sequence = findSubsequence(dp, s1)
-# print(sequence)
+sequence = findSubsequence(dp, s1)
+print(sequence)
 
 # recursive solution
-m = len(s1)
-n = len(s2)
-memo = [[-1 for i in range(n + 1)] for j in range(m + 1)]
-result = LCS_recursive(s1, s2, memo, m, n)
-print(result)
+# m = len(s1)
+# n = len(s2)
+# memo = [[-1 for i in range(n + 1)] for j in range(m + 1)]
+# result = LCS_recursive(s1, s2, memo, m, n)
+# print(result)

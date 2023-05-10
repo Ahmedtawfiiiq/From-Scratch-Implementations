@@ -49,5 +49,19 @@ def isPalindrome2(s):
     )  # shrink the string for the next call
 
 
+def getSequences(arr, i):
+    # base case
+    if i == len(arr):
+        return [[]]
+    # recursive case
+    sequences = getSequences(arr, i + 1)
+    result = []
+    for seq in sequences:
+        result.append(seq)
+        result.append([arr[i]] + seq)
+    return result
+
+
 print(sumNaturalNumbers(50))
 print(isPalindrome2("racecar"))
+print(getSequences([1, 2, 3], 0))
