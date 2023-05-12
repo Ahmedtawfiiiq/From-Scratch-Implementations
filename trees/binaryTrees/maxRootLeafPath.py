@@ -1,6 +1,7 @@
 from nodeClass import TreeNode
 
 
+# maximum sum path from root to a leaf node
 def findMaxPath(root):
     if root is None:
         return 0
