@@ -16,26 +16,42 @@ def findPath(root, value):
     return []
 
 
-a = TreeNode(3)
-b = TreeNode(5)
-c = TreeNode(1)
-d = TreeNode(6)
-e = TreeNode(2)
-f = TreeNode(0)
-g = TreeNode(8)
-h = TreeNode(7)
-i = TreeNode(4)
+# function to find all paths from root to a leaf node
+# that sum to a given value
+def findAllPaths(root, value):
+    if root is None:
+        return []
+    if root.val == value and root.left is None and root.right is None:
+        return [[root.val]]
+    leftPath = findAllPaths(root.left, value - root.val)
+    rightPath = findAllPaths(root.right, value - root.val)
+    return [[root.val] + path for path in leftPath + rightPath]
+
+
+a = TreeNode(5)
+b = TreeNode(4)
+c = TreeNode(8)
+d = TreeNode(11)
+e = TreeNode(13)
+f = TreeNode(4)
+g = TreeNode(7)
+h = TreeNode(2)
+i = TreeNode(5)
+j = TreeNode(1)
 
 a.left = b
 a.right = c
 b.left = d
-b.right = e
-c.left = f
-c.right = g
-e.left = h
-e.right = i
+c.left = e
+c.right = f
+d.left = g
+d.right = h
+f.left = i
+f.right = j
 
 root = a
 
 print(findPath(root, 5))
 print(findPath(root, 1))
+
+print(findAllPaths(root, 22))
