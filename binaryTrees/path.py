@@ -25,7 +25,26 @@ def findAllPaths(root, value):
         return [[root.val]]
     leftPath = findAllPaths(root.left, value - root.val)
     rightPath = findAllPaths(root.right, value - root.val)
-    return [[root.val] + path for path in leftPath + rightPath]
+    result = []
+    for path in leftPath + rightPath:
+        result.append([root.val] + path)
+    return result
+    # return [[root.val] + path for path in leftPath + rightPath]
+
+
+def allLeafPaths(root):
+    if root is None:
+        return []
+    if root.left is None and root.right is None:
+        return [[root.val]]
+    leftPath = allLeafPaths(root.left)
+    rightPath = allLeafPaths(root.right)
+    result = []
+    lr = leftPath + rightPath  # each represent a different path list
+    for path in lr:
+        result.append([root.val] + path)
+    return result
+    # return [[root.val] + path for path in leftPath + rightPath]
 
 
 a = TreeNode(5)
@@ -51,7 +70,9 @@ f.right = j
 
 root = a
 
-print(findPath(root, 5))
-print(findPath(root, 1))
+# print(findPath(root, 5))
+# print(findPath(root, 1))
 
-print(findAllPaths(root, 22))
+# print(findAllPaths(root, 22))
+
+print(allLeafPaths(root))

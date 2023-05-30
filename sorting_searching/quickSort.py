@@ -24,3 +24,9 @@ def partitioning(array, left, right):
 
 # quickSort(arr, left=0, right=len(arr) - 1)
 # print(arr)
+
+arr = [1, 2, 3, 1]
+# quickSort(arr, left=0, right=len(arr) - 1)
+# print(arr)
+b = partitioning(arr, left=0, right=len(arr) - 1)
+print(b)

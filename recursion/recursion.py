@@ -62,6 +62,17 @@ def getSequences(arr, i):
     return result
 
 
-print(sumNaturalNumbers(50))
-print(isPalindrome2("racecar"))
-print(getSequences([1, 2, 3], 0))
+def power(x, n):
+    if n == 0:
+        return 1
+    if n < 0:
+        return 1 / power(x, -n)
+    if n % 2 == 0:
+        return power(x * x, n // 2)
+    return x * power(x, n - 1)
+
+
+# print(sumNaturalNumbers(50))
+# print(isPalindrome2("racecar"))
+# print(getSequences([1, 2, 3], 0))
+print(power(1e-5, 100000))
