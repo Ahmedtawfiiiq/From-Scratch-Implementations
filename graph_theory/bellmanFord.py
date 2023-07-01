@@ -9,7 +9,7 @@ def bellmanFord(graph, start, showImpactOfNegativeCycles=False):
     for node in graph:
         for neighbour in graph[node]:
             edges.append((node, neighbour))
-    # relax each edge V - 1 times ( V = number of nodes(vertices))
+    # relax each edge V - 1 times (V = number of nodes(vertices))
     for i in range(2):
         for _ in range(len(graph) - 1):  # O(V)
             for edge in edges:  # O(E)

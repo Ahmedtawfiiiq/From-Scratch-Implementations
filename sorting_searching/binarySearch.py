@@ -1,7 +1,7 @@
 # return index of target in array, if not found return -1
 def binarySearch(array, left, right, target):
     if left > right:
-        return -1
+        return left
 
     mid = (left + right) // 2
 
@@ -30,7 +30,12 @@ def binarySearchIterative(arr, target):
     return -1
 
 
+arr = ["c", "f", "j"]
+target = "a"
+
 # given array must be sorted array
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(binarySearch(arr, 0, len(arr) - 1, 8))
-print(binarySearchIterative(arr, 8))
+# arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+index = binarySearch(arr, 0, len(arr) - 1, target)
+# print(binarySearchIterative(arr, 8))
+
+print(index)

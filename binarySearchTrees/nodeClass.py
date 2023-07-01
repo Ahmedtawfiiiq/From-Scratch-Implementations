@@ -6,19 +6,22 @@ class TreeNode:
 
 
 # BFS (level order traversal)
+# make nodes at each level as a list
 def bfs(root):
     if not root:
-        return []
+        return
     order = []
     queue = [root]
     while queue:
+        level = []
         for _ in range(len(queue)):
             node = queue.pop(0)
-            order.append(node.val)
+            level.append(node.val)
             if node.left:
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
+        order.append(level)
     return order
 
 
