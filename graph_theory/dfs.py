@@ -10,6 +10,15 @@ def dfs(graph, node, visited=set(), order=[]):
     return order
 
 
+def dfs_edge_list(graph, node, visited=set(), order=[]):
+    order.append(node)
+    visited.add(node)
+    for edge in graph:
+        if edge[0] == node and edge[1] not in visited:
+            dfs_edge_list(graph, edge[1], visited, order)
+    return order
+
+
 def dfs_stack(g, src, end):
     order = []
     parentMap = {}

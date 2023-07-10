@@ -44,9 +44,22 @@ def isPalindrome2(s):
     if len(s) <= 1:
         return True
     # recursive condition
-    return s[0] == s[-1] and isPalindrome(
+    return s[0] == s[-1] and isPalindrome2(
         s[1:-1]
     )  # shrink the string for the next call
+
+
+# ispalindrome iterative
+def isPalindrome3(s):
+    i = 0
+    j = len(s) - 1
+    while i < j:
+        if s[i] != s[j]:
+            return False
+        else:
+            i += 1
+            j -= 1
+    return True
 
 
 def getSequences(arr, i):
