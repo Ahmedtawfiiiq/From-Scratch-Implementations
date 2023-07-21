@@ -1,4 +1,6 @@
 import numpy as np
+from torch.nn import Softmax
+from torch import tensor
 
 
 # description
@@ -21,10 +23,12 @@ def deriv_softmax(x):
     return grad
 
 
-y = [1.1, 2.2, 0.2, -1.7]
-s = softmax(y)
-# round to 3 decimal places
-s = np.round(s, 3)
-# print(s)
-g = deriv_softmax(s)
-# print(g)
+y = [0.64, 0, 0, 0.0716] # estimated output
+t = tensor([0.64, 0, 0, 0.0716]) # tensor version
+
+print(softmax(y))
+print(deriv_softmax(y))
+
+s = Softmax(dim=0)
+# s = torch.softmax(dim=0) # deprecated
+print(s(t))
