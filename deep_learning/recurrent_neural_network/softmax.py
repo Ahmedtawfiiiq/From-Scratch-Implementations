@@ -25,6 +25,6 @@ y = [1.1, 2.2, 0.2, -1.7]
 s = softmax(y)
 # round to 3 decimal places
 s = np.round(s, 3)
-print(s)
+# print(s)
 g = deriv_softmax(s)
-print(g)
+# print(g)
