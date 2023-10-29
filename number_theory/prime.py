@@ -34,7 +34,7 @@ def count_primes(n):
         return 0
     primes = [True] * (n + 1)
     primes[0] = primes[1] = False
-    i = 2 
+    i = 2
     while i * i <= n:
         if primes[i]:
             j = i * i
@@ -45,6 +45,11 @@ def count_primes(n):
     return sum(primes)
 
 
-x = 10
-c = count_primes(x)
-print(c)
+# x = 10
+# c = count_primes(x)
+# print(c)
+
+from math import factorial
+
+n = 10
+# print(prime_factorization(factorial(n)))
