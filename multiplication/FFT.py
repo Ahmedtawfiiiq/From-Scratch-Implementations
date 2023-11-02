@@ -115,6 +115,11 @@ def FFT(a, inverse=False):
 # print(FFT_multiplication(a, b))
 
 # ex6(integer multiplication)
-a = 14
-b = 37
-print(FFT_integer_multiplication(a, b))
+# a = 14
+# b = 37
+# print(FFT_integer_multiplication(a, b))
+
+# test
+a = [3, 1]
+b = [5, 2]
+print(FFT_multiplication(a, b))

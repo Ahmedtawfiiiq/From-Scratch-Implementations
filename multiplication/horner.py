@@ -5,7 +5,7 @@ def horner(poly, x):
     return result
 
 
-polynomial = [2, 3, -4, 1]
+# polynomial = [2, 3, -4, 1]
 # a = (an-1, an-2, ..., a1, a0)
-x = 8
-print(horner(polynomial, x))
+# x = 8
+# print(horner(polynomial, x))
