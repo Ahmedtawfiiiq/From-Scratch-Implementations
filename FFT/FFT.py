@@ -24,6 +24,18 @@ def FFT_multiplication(a, b):
     return c
 
 
+def FFT_integer_multiplication(a, b):
+    # a and b are integers
+    # represent a and b as polynomials
+    # a = (a0, a1, ..., an-1)
+    # b = (b0, b1, ..., bm-1)
+    a = np.array([int(i) for i in str(a)])[::-1]
+    b = np.array([int(i) for i in str(b)])[::-1]
+    c = FFT_multiplication(a, b)
+    result = int(sum([c[i] * 10**i for i in range(len(c))]))
+    return result
+
+
 def DFT(a, inverse=False):
     y = FFT(a, inverse)
     if not inverse:
@@ -88,7 +100,12 @@ def FFT(a, inverse=False):
 # print(FFT_multiplication(a, b))
 
 # ex5 (polynomial multiplication: book example)
-a = np.array([9, -10, 7, 6])
-b = np.array([-5, 4, 0, -2])
-# result [-45.  86. -75. -20.  44. -14. -12.  -0.]
-print(FFT_multiplication(a, b))
+# a = np.array([9, -10, 7, 6])
+# b = np.array([-5, 4, 0, -2])
+# # result [-45.  86. -75. -20.  44. -14. -12.  -0.]
+# print(FFT_multiplication(a, b))
+
+# ex6(integer multiplication)
+a = 14
+b = 37
+print(FFT_integer_multiplication(a, b))
