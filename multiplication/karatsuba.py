@@ -13,7 +13,7 @@ def karatsuba(x, y, integer=True):
         x = [int(i) for i in str(x)]
         y = [int(i) for i in str(y)]
     if len(x) != len(y):
-        n = max(len(x), len(y))
+        n = int(2 ** np.ceil(np.log2(len(x) + len(y) - 1)))
         x = np.pad(x, (n - len(x), 0))
         y = np.pad(y, (n - len(y), 0))
     coefficients = karatsuba_multiplication(x, y)
@@ -58,8 +58,8 @@ def karatsuba_multiplication(x, y):
 
 x = 12344
 y = 4321
-# print(karatsuba(x, y))
+print(karatsuba(x, y))
 
-a = [6, 7, -10, 9]
-b = [-2, 0, 4, -5]
+a = [0, 0, 3, 5]
+b = [0, 2, 9, -5]
 print(karatsuba(a, b, integer=False))
