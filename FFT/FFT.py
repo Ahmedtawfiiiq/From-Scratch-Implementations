@@ -1,6 +1,14 @@
 import numpy as np
 
 
+def horner(poly, x):
+    # poly = (a0, a1, ..., an-1)
+    result = poly[-1]
+    for i in range(len(poly) - 2, -1, -1):
+        result = result * x + poly[i]
+    return int(result)
+
+
 def FFT_multiplication(a, b):
     # for any two polynomials a and b
     # a = (a0, a1, ..., an-1)
@@ -32,7 +40,8 @@ def FFT_integer_multiplication(a, b):
     a = np.array([int(i) for i in str(a)])[::-1]
     b = np.array([int(i) for i in str(b)])[::-1]
     c = FFT_multiplication(a, b)
-    result = int(sum([c[i] * 10**i for i in range(len(c))]))
+    # result = int(sum([c[i] * 10**i for i in range(len(c))]))
+    result = horner(c, 10)
     return result
 
 

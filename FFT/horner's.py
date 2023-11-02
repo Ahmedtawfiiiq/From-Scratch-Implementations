@@ -6,5 +6,6 @@ def horner(poly, x):
 
 
 polynomial = [2, 3, -4, 1]
+# a = (an-1, an-2, ..., a1, a0)
 x = 8
 print(horner(polynomial, x))
