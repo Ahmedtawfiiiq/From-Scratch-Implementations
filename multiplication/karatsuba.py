@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def horner(poly, x):
     result = poly[0]
     for i in range(1, len(poly)):
@@ -9,6 +12,10 @@ def karatsuba(x, y, integer=True):
     if integer:
         x = [int(i) for i in str(x)]
         y = [int(i) for i in str(y)]
+    if len(x) != len(y):
+        n = max(len(x), len(y))
+        x = np.pad(x, (n - len(x), 0))
+        y = np.pad(y, (n - len(y), 0))
     coefficients = karatsuba_multiplication(x, y)
     if integer:
         return horner(coefficients, 10)
@@ -49,10 +56,10 @@ def karatsuba_multiplication(x, y):
     return coefficients
 
 
-x = 1234
+x = 12344
 y = 4321
-print(karatsuba(x, y))
+# print(karatsuba(x, y))
 
 a = [6, 7, -10, 9]
 b = [-2, 0, 4, -5]
-# print(karatsuba(a, b, integer=False))
+print(karatsuba(a, b, integer=False))
