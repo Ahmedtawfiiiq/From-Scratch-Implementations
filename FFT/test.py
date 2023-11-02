@@ -39,5 +39,12 @@ def ITERATIVE_FFT(a):
                 w *= wm
     return A
 
-a = np.array([0, 4, 2, 6, 1, 5, 3, 7])
-print(ITERATIVE_FFT(a))
+
+def twiddle_factors(N):
+    w = np.exp(-2j * np.pi * np.arange(N) / N)
+    return np.round(w, N)
+
+
+# a = np.array([0, 4, 2, 6, 1, 5, 3, 7])
+# print(ITERATIVE_FFT(a))
+# print(twiddle_factors(4))
