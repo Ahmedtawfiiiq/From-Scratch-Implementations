@@ -54,6 +54,7 @@ def DFT(a, inverse=False):
         return np.round(y.real / n, n)
 
 
+# evaluation of point-value pairs
 def FFT(a, inverse=False):
     # the length of a must be a power of 2
     n = len(a)
@@ -68,15 +69,16 @@ def FFT(a, inverse=False):
         w = 1
 
         # divide and conquer
-
         a_0 = a[::2]
         a_1 = a[1::2]
-
         y_0 = FFT(a_0, inverse)
         y_1 = FFT(a_1, inverse)
 
         y = np.zeros(n, dtype=complex)
         for k in range(int(n / 2)):
+            # A(x) = Aeven(x^2) + x * Aodd(x^2)
+            # A(-x) = Aeven(x^2) - x * Aodd(x^2) -> -xi = x(i+n/2)
+            # x = wn^i -> wn^(i+n/2) = -wn^i
             y[k] = y_0[k] + w * y_1[k]
             y[k + int(n / 2)] = y_0[k] - w * y_1[k]
             w = w * wn

@@ -7,7 +7,7 @@ def horner(poly, x):
         result = result * x + poly[i]
     return result
 
-
+    
 def karatsuba(x, y, integer=True):
     if integer:
         x = [int(i) for i in str(x)]
@@ -60,6 +60,6 @@ x = 12344
 y = 4321
 print(karatsuba(x, y))
 
-a = [0, 0, 3, 5]
-b = [0, 2, 9, -5]
+a = [6, 7, -10, 9]
+b = [-2, 0, 4, -5]
 print(karatsuba(a, b, integer=False))

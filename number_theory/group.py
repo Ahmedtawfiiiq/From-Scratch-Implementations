@@ -14,10 +14,15 @@ def group_generator(group, generator, divisor):
         # multiplication modulo divisor
         elements = np.append(elements, ((generator**i) % divisor))
         i += 1
-    return elements
+    for ele in elements:
+        if ele not in group:
+            print(f"{generator} is not a generator")
+            return
+    print(f"{generator} is a generator")
+    return
 
 
 group = np.array([1, 3, 4, 5, 9])
 generator = 3
 divisor = 11
-print(modulo(group, generator, divisor))
+group_generator(group, generator, divisor)
