@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def group_generator(group, generator, divisor):
+def group_generator(group, generator, divisor, type="additive"):
     if len(group) == 0:
         print("Group is empty")
         return None
@@ -11,18 +11,22 @@ def group_generator(group, generator, divisor):
     elements = np.array([])
     i = 1
     while i <= len(group):
-        # multiplication modulo divisor
-        elements = np.append(elements, ((generator**i) % divisor))
+        if type == "additive":
+            elements = np.append(elements, (generator*i) % divisor)
+        elif type == "multiplicative":
+            elements = np.append(elements, ((generator**i) % divisor))
         i += 1
-    for ele in elements:
-        if ele not in group:
+    for g in group:
+        if g not in elements:
             print(f"{generator} is not a generator")
             return
     print(f"{generator} is a generator")
+    print(f"Elements: {elements}")
     return
 
 
-group = np.array([1, 3, 4, 5, 9])
-generator = 3
-divisor = 11
-group_generator(group, generator, divisor)
+n = 11
+group = np.array(list(range(1, n)))
+divisor = n
+for g in group:
+    group_generator(group, g, divisor, type="multiplicative")

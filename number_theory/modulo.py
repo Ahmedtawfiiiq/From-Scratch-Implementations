@@ -1,9 +1,7 @@
-from math import gcd, factorial
-
 def modulo(a, n):
     return a % n
 
-a = factorial(4) # 4! = 4 * 3 * 2 * 1 = 24
-n = 3
-print(modulo(a, n))
-# print(gcd(a, n))
+
+a = 2**7
+n = 7
+print("a = {0}, n = {1}, a mod n = {2}".format(a, n, modulo(a, n)))

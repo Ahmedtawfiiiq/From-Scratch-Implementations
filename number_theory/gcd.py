@@ -26,8 +26,8 @@ def gcd_extended_inverse(a, b):
         return None
 
 
-a = 3
-b = 1
+a = 2201
+b = 1208-1
 gcd = gcd_recursion(a, b)
 print("gcd recursive({0}, {1}) = {2}".format(a, b, gcd))
 # gcd = gcd_extended(a, b)

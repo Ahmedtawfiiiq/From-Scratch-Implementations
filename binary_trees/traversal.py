@@ -1,6 +1,9 @@
 from nodeClass import TreeNode
 
 
+# preorder: root, left, right
+# inorder: left, root, right
+# postorder: left, right, root
 def dfs(root, inorder=[], preorder=[], postorder=[]):
     if not root:
         return

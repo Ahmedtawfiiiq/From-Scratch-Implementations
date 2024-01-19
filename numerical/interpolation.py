@@ -9,6 +9,8 @@ def horner(poly, x):
 
 
 def lagrange_interpolation(x, y, x0):
+    # given point-value pairs
+    # return the value of the interpolating polynomial at x0
     n = len(x)
     y0 = 0
     for i in range(n):

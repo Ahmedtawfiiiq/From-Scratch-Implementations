@@ -62,3 +62,9 @@ def chinese_operations(A, B, moduli, operation):
 # # perform C = A * B
 # C = chinese_operations(A, B, moduli, "*")
 # print("C = {0}".format(C)) # C = 865
+
+
+residues = [4, 3]
+moduli = [7, 6]
+A = chinese(residues, moduli)
+print("A = {0}".format(A)) # A = 42

@@ -8,6 +8,15 @@ def dfsRecursive(graph, start, arrangement):
         arrangement.append([start, next_node])
 
 
+def dfsIterative(graph, start, arrangement):
+    stack = [start]
+    while stack:
+        while graph[stack[-1]]:
+            next_node = graph[stack[-1]].pop()
+            stack.append(next_node)
+        arrangement.append(stack.pop())
+
+
 def eulerianPath(pairs):
     start = pairs[0][0]  # assume eulerian circuit
     graph = defaultdict(list)
@@ -21,7 +30,8 @@ def eulerianPath(pairs):
             start = key
             break
     arrangement = []
-    dfsRecursive(graph, start, arrangement)
+    # dfsRecursive(graph, start, arrangement)
+    dfsIterative(graph, start, arrangement)
     return arrangement[::-1]
 
 
