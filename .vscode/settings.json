@@ -50,6 +50,9 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "ll.h": "c",
+        "trees.h": "c",
+        "math.h": "c"
     }
 }

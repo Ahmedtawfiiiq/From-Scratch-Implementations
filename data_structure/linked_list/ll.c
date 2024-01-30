@@ -8,120 +8,103 @@ node *create_node(uint8 value)
     return n;
 }
 
-linkedList *ll_init()
-{
-    linkedList *ll = (linkedList *)malloc(sizeof(linkedList));
-    ll->head = NULL;
-    ll->tail = NULL;
-    return ll;
-}
-
-uint8 isEmpty(linkedList *ll)
-{
-    if (ll->head == NULL)
-        return 1;
-    else
-        return 0;
-}
-
-void insert_start(linkedList *ll, uint8 value)
+node *insert_start(node *head, uint8 value)
 {
     node *n = create_node(value);
-    if (isEmpty(ll))
-    {
-        ll->head = n;
-        ll->tail = n;
-    }
-    else
-    {
-        n->next = ll->head;
-        ll->head = n;
-    }
+    n->next = head;
+    head = n;
+    return head;
 }
 
-void insert_end(linkedList *ll, uint8 value)
+node *delete_start(node *head)
 {
-    node *n = create_node(value);
-    if (isEmpty(ll))
+    if (head != NULL)
     {
-        ll->head = n;
-        ll->tail = n;
-    }
-    else
-    {
-        ll->tail->next = n;
-        ll->tail = n;
-    }
-}
-
-void delete_start(linkedList *ll)
-{
-    if (!isEmpty(ll))
-    {
-        node *n = ll->head;
-        ll->head = ll->head->next;
+        node *n = head;
+        head = head->next;
         free(n);
-        if (isEmpty(ll))
+        return head;
+    }
+}
+
+void delete_end(node *head)
+{
+    if (head != NULL)
+    {
+        node *tail = head;
+        node *prev = NULL;
+        while (tail->next != NULL)
         {
-            ll->tail = NULL;
+            prev = tail;
+            tail = tail->next;
         }
+        free(tail);
+        if (prev != NULL)
+            prev->next = NULL;
+        else
+            head = NULL;
     }
 }
 
-void trav_recursively(linkedList *ll)
+void trav_recursively(node *head)
 {
-    if (ll->head != NULL)
+    if (head != NULL)
     {
-        printf("%d ", ll->head->data);
-        trav_recursively(ll->head->next);
+        printf("%d ", head->data);
+        trav_recursively(head->next);
     }
+    else
+        printf("\n");
 }
 
-void trav_iteratively(linkedList *ll)
+void trav_iteratively(node *head)
 {
-    while (ll->head != NULL)
+    node *n = head;
+    while (n != NULL)
     {
-        printf("%d ", ll->head->data);
-        ll->head = ll->head->next;
+        printf("%d ", n->data);
+        n = n->next;
     }
+    printf("\n");
 }
 
-node *get_tail(node *n)
+node *get_tail(node *head)
 {
-    if (n == NULL)
+    if (head == NULL)
         return NULL;
     else
     {
-        if (n->next != NULL)
-            return get_tail(n->next);
+        if (head->next != NULL)
+            return get_tail(head->next);
         else
+            return head;
+    }
+}
+
+node *search_recursively(node *head, uint8 value)
+{
+    if (head == NULL)
+        return NULL;
+    else
+    {
+        if (head->data == value)
+            return head;
+        else
+            return search_recursively(head->next, value);
+    }
+}
+
+node *search_iteratively(node *head, uint8 value)
+{
+    node *n = head;
+    while (n != NULL)
+    {
+        if (n->data == value)
             return n;
-    }
-}
-
-node *search_recursively(linkedList *ll, uint8 value)
-{
-    if (ll->head == NULL)
-        return NULL;
-    else
-    {
-        if (ll->head->data == value)
-            return ll->head;
         else
-            return search(ll->head->next, value);
+            n = n->next;
     }
-}
-
-node *search_iteratively(linkedList *ll, uint8 value)
-{
-    while (ll->head != NULL)
-    {
-        if (ll->head->data == value)
-            return ll->head;
-        else
-            ll->head = ll->head->next;
-    }
-    return ll->head;
+    return n;
 }
 
 // insert a new node with data (value)
@@ -142,4 +125,89 @@ node *deleteAfter(node *n)
         free(d);
         return n;
     }
+}
+
+uint8 sum_recursively(node *head)
+{
+    if (head == NULL)
+        return 0;
+    else
+        return head->data + sum_recursively(head->next);
+}
+
+uint8 sum_iteratively(node *head)
+{
+    uint8 sum = 0;
+    node *n = head;
+    while (n != NULL)
+    {
+        sum += n->data;
+        n = n->next;
+    }
+    return sum;
+}
+
+uint8 count(node *head)
+{
+    uint8 c = 0;
+    node *n = head;
+    while (n != NULL)
+    {
+        n = n->next;
+        c += 1;
+    }
+    return c;
+}
+
+node *sort(node *h1, node *h2)
+{
+    node *h;
+    if (h1->data < h2->data)
+    {
+        h = create_node(h1->data);
+        h1 = h1->next;
+    }
+    else if (h1->data > h2->data)
+    {
+        h = create_node(h2->data);
+        h2 = h2->next;
+    }
+    else
+    {
+        h = create_node(h1->data);
+        h = insert_start(h, h2->data);
+        h1 = h1->next;
+        h2 = h2->next;
+    }
+    while (h1 != NULL && h2 != NULL)
+    {
+        if (h1->data < h2->data)
+        {
+            h = insert_start(h, h1->data);
+            h1 = h1->next;
+        }
+        else if (h1->data > h2->data)
+        {
+            h = insert_start(h, h2->data);
+            h2 = h2->next;
+        }
+        else
+        {
+            h = insert_start(h, h1->data);
+            h = insert_start(h, h2->data);
+            h1 = h1->next;
+            h2 = h2->next;
+        }
+    }
+    while (h1 != NULL)
+    {
+        h = insert_start(h, h1->data);
+        h1 = h1->next;
+    }
+    while (h2 != NULL)
+    {
+        h = insert_start(h, h2->data);
+        h2 = h2->next;
+    }
+    return h;
 }

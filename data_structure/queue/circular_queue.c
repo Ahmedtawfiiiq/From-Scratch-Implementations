@@ -5,7 +5,7 @@
 queue *queue_init(uint8 size)
 {
     queue *q = (queue *)malloc(sizeof(queue));
-    q->items = (uint8 *)malloc(size * sizeof(uint8));
+    q->items = (uint64 *)malloc(size * sizeof(uint64));
     q->front = 0;
     q->rear = 0;
     q->capcity = size;
@@ -13,9 +13,9 @@ queue *queue_init(uint8 size)
     return q;
 }
 
-void enqueue(queue *q, uint8 value)
+void enqueue(queue *q, uint64 value)
 {
-    if (isFull(q))
+    if (isFullQueue(q))
     {
         printf("Queue is full\n");
     }
@@ -28,16 +28,16 @@ void enqueue(queue *q, uint8 value)
     }
 }
 
-uint8 dequeue(queue *q)
+uint64 dequeue(queue *q)
 {
-    if (isEmpty(q))
+    if (isEmptyQueue(q))
     {
         printf("Queue is empty\n");
         return -1;
     }
     else
     {
-        uint8 value = q->items[q->front];
+        uint64 value = q->items[q->front];
         q->front += 1;
         q->front %= q->capcity; // circular queue
         q->n -= 1;
@@ -45,7 +45,7 @@ uint8 dequeue(queue *q)
     }
 }
 
-uint8 isEmpty(queue *q)
+uint8 isEmptyQueue(queue *q)
 {
     if (q->n == 0)
         return 1;
@@ -53,7 +53,7 @@ uint8 isEmpty(queue *q)
         return 0;
 }
 
-uint8 isFull(queue *q)
+uint8 isFullQueue(queue *q)
 {
     if (q->n == q->capcity)
         return 1;
@@ -67,12 +67,12 @@ void dispose(queue *q)
     free(q);
 }
 
-uint8 getFirst(queue *q)
+uint64 getFirst(queue *q)
 {
     return q->items[q->front];
 }
 
-uint8 getLast(queue *q)
+uint64 getLast(queue *q)
 {
     if (q->rear == 0)
         return q->items[q->capcity - 1];
@@ -80,33 +80,43 @@ uint8 getLast(queue *q)
         return q->items[q->rear - 1];
 }
 
-void display(queue *q)
+void displayQueue(queue *q)
 {
     queue *c = queue_init(q->n);
-    while (!isEmpty(q))
+    while (!isEmptyQueue(q))
     {
-        uint8 value = dequeue(q);
-        printf("%d ", value);
+        uint64 value = dequeue(q);
+        printf("%ld ", value);
         enqueue(c, value);
     }
     printf("\n");
-    while (!isEmpty(c))
+    while (!isEmptyQueue(c))
         enqueue(q, dequeue(c));
 }
 
-uint8 getMinimum(queue *q)
+uint64 getMinimum(queue *q)
 {
     queue *c = queue_init(q->n);
-    uint8 min = dequeue(q);
+    uint64 min = dequeue(q);
     enqueue(c, min);
-    while (!isEmpty(q))
+    while (!isEmptyQueue(q))
     {
-        uint8 value = dequeue(q);
+        uint64 value = dequeue(q);
         if (value < min)
             min = value;
         enqueue(c, value);
     }
-    while (!isEmpty(c))
+    while (!isEmptyQueue(c))
         enqueue(q, dequeue(c));
     return min;
+}
+
+void reverse(queue *q)
+{
+    if (!isEmptyQueue(q))
+    {
+        uint8 value = dequeue(q);
+        reverse(q);
+        enqueue(q, value);
+    }
 }

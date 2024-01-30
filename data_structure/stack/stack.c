@@ -25,9 +25,17 @@ uint8 pop(stack *s)
     return s->items[s->top];
 }
 
-uint8 isEmpty(stack *s)
+uint8 isEmptyStack(stack *s)
 {
     if (s->top == 0)
+        return 1;
+    else
+        return 0;
+}
+
+uint8 isFullStack(stack *s)
+{
+    if (s->top == s->size)
         return 1;
     else
         return 0;
@@ -36,14 +44,6 @@ uint8 isEmpty(stack *s)
 uint8 top(stack *s)
 {
     return s->items[s->top - 1];
-}
-
-uint8 isFull(stack *s)
-{
-    if (s->top == s->size)
-        return 1;
-    else
-        return 0;
 }
 
 // if top of stack is known
@@ -55,16 +55,16 @@ uint8 isFull(stack *s)
 // }
 
 // if top of stack is not known
-void display(stack *s, uint8 maxSize)
+void displayStack(stack *s, uint8 maxSize)
 {
     stack *c = stack_init(maxSize);
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         uint8 v = pop(s);
         printf("%d ", v);
         push(c, v);
     }
-    while (!isEmpty(c))
+    while (!isEmptyStack(c))
     {
         push(s, pop(c));
     }
@@ -75,12 +75,12 @@ uint8 count(stack *s, uint8 maxSize)
 {
     uint8 i = 0;
     stack *c = stack_init(maxSize);
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         i += 1;
         push(c, pop(s));
     }
-    while (!isEmpty(c))
+    while (!isEmptyStack(c))
         push(s, pop(c));
     return i;
 }
@@ -89,13 +89,13 @@ uint8 sum(stack *s, uint8 maxSize)
 {
     uint8 result = 0;
     stack *c = stack_init(maxSize);
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         uint8 value = pop(s);
         result += value;
         push(c, value);
     }
-    while (!isEmpty(c))
+    while (!isEmptyStack(c))
         push(s, pop(c));
     return result;
 }
@@ -111,30 +111,31 @@ void deleteAt(stack *s, uint8 k, uint8 maxSize)
         i += 1;
     }
     pop(s);
-    while (!isEmpty(c))
+    while (!isEmptyStack(c))
         push(s, pop(c));
 }
 
 // top of the stack contains the smallest element
 void pushSorted(stack *s, uint8 value, uint8 maxSize)
 {
-    if (isEmpty(s) || value <= top(s))
+    if (isEmptyStack(s) || value <= top(s))
         push(s, value);
     else
     {
         stack *c = stack_init(maxSize);
-        while (!isEmpty(s) && value > top(s))
+        while (!isEmptyStack(s) && value > top(s))
         {
             push(c, pop(s));
         }
         push(s, value);
-        while (!isEmpty(c))
+        while (!isEmptyStack(c))
         {
             push(s, pop(c));
         }
     }
 }
 
+// check if the sum of the first half of the stack is equal to the sum of the second half
 uint8 isSumEqual(stack *s, uint8 maxSize)
 {
     uint8 n = count(s, maxSize);
@@ -155,14 +156,14 @@ uint8 isSumEqual(stack *s, uint8 maxSize)
         push(c, pop(s));
 
     // check second half
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         t = pop(s);
         second += t;
         push(c, t);
     }
 
-    while (!isEmpty(c))
+    while (!isEmptyStack(c))
     {
         push(c, pop(s));
     }
@@ -188,7 +189,7 @@ uint8 isPalindrome(uint8 *str)
     if (n % 2 != 0)
         i += 1;
 
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         if (pop(s) != str[i])
             return 0;
@@ -217,6 +218,30 @@ uint8 *decimalToBinary(uint8 n)
     return result;
 }
 
+// take two sorted stacks with minimum on top
+// and return a sorted stack with maximum on top
+stack *sort(stack *s1, stack *s2)
+{
+    stack *s = stack_init(100);
+    while (!isEmptyStack(s1) && !isEmptyStack(s2))
+    {
+        if (top(s1) < top(s2))
+            push(s, pop(s1));
+        else if (top(s2) < top(s1))
+            push(s, pop(s2));
+        else
+        {
+            push(s, pop(s1));
+            push(s, pop(s2));
+        }
+    }
+    while (!isEmptyStack(s1))
+        push(s, pop(s1));
+    while (!isEmptyStack(s2))
+        push(s, pop(s2));
+    return s;
+}
+
 uint8 priority(uint8 symbol)
 {
     if (symbol == '+' || symbol == '-')
@@ -235,7 +260,7 @@ uint8 *infixToPostfix(uint8 *infix)
     uint8 j = 0;
     while (infix[i] != '\0')
     {
-        if (isalpha(infix[i]))
+        if (isalpha(infix[i]) || isdigit(infix[i]))
         {
             postfix[j] = infix[i];
             j += 1;
@@ -246,7 +271,7 @@ uint8 *infixToPostfix(uint8 *infix)
         }
         else if (*(infix + i) == ')')
         {
-            while (!isEmpty(s) && top(s) != '(')
+            while (!isEmptyStack(s) && top(s) != '(')
             {
                 postfix[j] = pop(s);
                 j += 1;
@@ -255,7 +280,7 @@ uint8 *infixToPostfix(uint8 *infix)
         }
         else // operator
         {
-            while (!isEmpty(s) && priority(top(s)) >= priority(infix[i]) && top(s) != '(')
+            while (!isEmptyStack(s) && priority(top(s)) >= priority(infix[i]) && top(s) != '(')
             {
                 postfix[j] = pop(s);
                 j += 1;
@@ -264,7 +289,7 @@ uint8 *infixToPostfix(uint8 *infix)
         }
         i += 1;
     }
-    while (!isEmpty(s))
+    while (!isEmptyStack(s))
     {
         postfix[j] = pop(s);
         j += 1;

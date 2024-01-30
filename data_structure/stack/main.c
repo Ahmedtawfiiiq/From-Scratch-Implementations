@@ -15,8 +15,8 @@ typedef signed char int8;
 
 int main()
 {
-    stack *s;
-    s = stack_init(100);
+    // stack *s;
+    // s = stack_init(100);
     // push(s, 2);
     // push(s, 7);
     // push(s, 4);
@@ -61,11 +61,29 @@ int main()
     //     printf("Not palindrome\n");
     // uint8 *binary = decimalToBinary(10);
     // printf("%s\n", binary);
-    uint8 *infix = "(a+b*(c-d))/e"; // abcd-*+e/
+    // uint8 *infix = "(a+b*(c-d))/e"; // abcd-*+e/
     // uint8 *infix = "a+b*c/d-e"; // abc*d/+e-
-    uint8 *postfix = infixToPostfix(infix);
-    printf("%s\n", postfix);
+    // uint8 *infix = "(7*(2+3))"; // 723+*
+    // uint8 *postfix = infixToPostfix(infix);
+    // printf("%s\n", postfix);
     // uint8 *postfix = "45+42-*73*+";
+    // uint8 *postfix = "1234+*+";
     // printf("%d\n", evaluatePostfix(postfix));
+
+    // two sorted stacks
+    // with minimum on top
+    stack *s1 = stack_init(100);
+    stack *s2 = stack_init(100);
+
+    push(s1, 5);
+    push(s1, 3);
+    push(s1, 1);
+    push(s2, 6);
+    push(s2, 4);
+    push(s2, 2);
+    displayStack(s1, 100);
+    displayStack(s2, 100);
+    stack *s = sort(s1, s2);
+    displayStack(s, 100);
     return 0;
 }

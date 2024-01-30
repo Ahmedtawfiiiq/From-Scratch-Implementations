@@ -12,17 +12,20 @@ typedef struct
 {
     uint8 front, rear;
     uint8 capcity;
-    uint8 *items;
+    uint64 *items;
     uint8 n; // to solve the problem of isFull() and isEmpty() have the same condition
 } queue;
 
+// standard functions
 queue *queue_init(uint8 size);
-void enqueue(queue *q, uint8 value);
-uint8 dequeue(queue *q);
-uint8 isEmpty(queue *q);
-uint8 isFull(queue *q);
+void enqueue(queue *q, uint64 value);
+uint64 dequeue(queue *q);
+uint8 isEmptyQueue(queue *q);
+uint8 isFullQueue(queue *q);
 void dispose(queue *q);
-uint8 getFirst(queue *q);
-uint8 getLast(queue *q);
-void display(queue *q);
-uint8 getMinimum(queue *q);
+uint64 getFirst(queue *q);
+uint64 getLast(queue *q);
+
+void displayQueue(queue *q);
+uint64 getMinimum(queue *q);
+void reverse(queue *q);
