@@ -26,17 +26,26 @@ int main()
     // display(q);
     // printf("front index: %d\n", q->front);
     // printf("rear index: %d\n", q->rear);
-    queue *s = queue_init(100);
-    enqueue(s, 1);
-    enqueue(s, 2);
-    enqueue(s, 3);
-    enqueue(s, 4);
-    enqueue(s, 5);
-    enqueue(s, 6);
-    enqueue(s, 7);
-    reverse(s);
-    while (!isEmptyQueue(s))
-        printf("%ld ", dequeue(s));
-    printf("\n");
+    // queue *s = queue_init(100);
+    // enqueue(s, 1);
+    // enqueue(s, 2);
+    // enqueue(s, 3);
+    // enqueue(s, 4);
+    // enqueue(s, 5);
+    // enqueue(s, 6);
+    // enqueue(s, 7);
+    // reverse(s);
+    // while (!isEmptyQueue(s))
+    //     printf("%ld ", dequeue(s));
+    // printf("\n");
+
+    stack *s = stack_init(10);
+    enqueue_stack(s, 1);
+    enqueue_stack(s, 2);
+    enqueue_stack(s, 3);
+    enqueue_stack(s, 4);
+    enqueue_stack(s, 5);
+    printf("%d\n", dequeue_stack(s));
+    printf("%d\n", dequeue_stack(s));
     return 0;
 }

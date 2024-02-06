@@ -13,12 +13,14 @@ stack *stack_init(uint8 size)
     return s;
 }
 
+// complexity: O(1)
 void push(stack *s, uint8 value)
 {
     s->items[s->top] = value;
     s->top += 1;
 }
 
+// complexity: O(1)
 uint8 pop(stack *s)
 {
     s->top -= 1;
@@ -71,7 +73,7 @@ void displayStack(stack *s, uint8 maxSize)
     printf("\n");
 }
 
-uint8 count(stack *s, uint8 maxSize)
+uint8 countStack(stack *s, uint8 maxSize)
 {
     uint8 i = 0;
     stack *c = stack_init(maxSize);
@@ -138,7 +140,7 @@ void pushSorted(stack *s, uint8 value, uint8 maxSize)
 // check if the sum of the first half of the stack is equal to the sum of the second half
 uint8 isSumEqual(stack *s, uint8 maxSize)
 {
-    uint8 n = count(s, maxSize);
+    uint8 n = countStack(s, maxSize);
     uint8 first = 0, second = 0, i = 0, t;
     stack *c = stack_init(maxSize);
 
@@ -297,6 +299,17 @@ uint8 *infixToPostfix(uint8 *infix)
     return postfix;
 }
 
+uint8 power(uint8 a, uint8 b)
+{
+    if (b == 0)
+        return 1;
+    uint8 result = a;
+    result = power(a, b / 2);
+    if (b % 2 == 0)
+        return result * result;
+    return result * result * a;
+}
+
 uint8 evaluatePostfix(uint8 *postfix)
 {
     stack *s = stack_init(100);
@@ -325,9 +338,39 @@ uint8 evaluatePostfix(uint8 *postfix)
             case '/':
                 push(s, op2 / op1);
                 break;
+            case '^': // power
+                push(s, power(op2, op1));
+                break;
             }
         }
         i += 1;
     }
     return pop(s);
+}
+
+uint8 isBalanced(uint8 *p)
+{
+    uint8 n = strlen(p);
+    stack *s = stack_init(n);
+    for (uint8 i = 0; i < n; i++)
+    {
+        if (p[i] == '(' || p[i] == '[' || p[i] == '{')
+            push(s, p[i]);
+        else
+        {
+            if (isEmptyStack(s))
+                return 0;
+            uint8 character = pop(s);
+            if (p[i] == ')' && character != '(')
+                return 0;
+            if (p[i] == ']' && character != '[')
+                return 0;
+            if (p[i] == '}' && character != '{')
+                return 0;
+        }
+    }
+    if (isEmptyStack(s))
+        return 1;
+    else
+        return 0;
 }

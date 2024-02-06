@@ -120,3 +120,20 @@ void reverse(queue *q)
         enqueue(q, value);
     }
 }
+
+void enqueue_stack(stack *s, uint8 value)
+{
+    s->items[s->top] = value;
+    s->top++;
+}
+
+uint8 dequeue_stack(stack *s)
+{
+    stack *c = stack_init(100);
+    while (!isEmptyStack(s))
+        push(c, pop(s));
+    uint8 x = pop(c);
+    while (!isEmptyStack(c))
+        push(s, pop(c));
+    return x;
+}

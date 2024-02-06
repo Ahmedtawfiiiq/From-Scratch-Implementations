@@ -1,3 +1,5 @@
+#include "../stack/stack.h"
+
 typedef unsigned long uint64;
 typedef unsigned int uint32;
 typedef unsigned short uint16;
@@ -10,6 +12,8 @@ typedef signed char int8;
 
 typedef struct
 {
+    // capacity is the maximum number of elements that can be stored in the queue
+    // n is the number of elements in the queue
     uint8 front, rear;
     uint8 capcity;
     uint64 *items;
@@ -29,3 +33,6 @@ uint64 getLast(queue *q);
 void displayQueue(queue *q);
 uint64 getMinimum(queue *q);
 void reverse(queue *q);
+
+void enqueue_stack(stack *s, uint8 value);
+uint8 dequeue_stack(stack *s);

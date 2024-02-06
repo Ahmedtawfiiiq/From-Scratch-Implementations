@@ -49,12 +49,13 @@ void min_heapify_bottom(uint64 *heap, uint8 size, int8 index)
 
 void bottom_up(uint64 *heap, uint8 size)
 {
-    int8 i = (size - 1) / 2; // last parent node
+    int8 i = parent_index(size - 1); // parent of last leaf node
     for (; i >= 0; i--)
         // max_heapify_bottom(heap, size, i);
         min_heapify_bottom(heap, size, i);
 }
 
+// complexity: O(log n)
 void max_heapify_up(uint64 *heap, int8 index)
 {
     if (index != 0)
@@ -68,6 +69,7 @@ void max_heapify_up(uint64 *heap, int8 index)
     }
 }
 
+// complexity: O(log n)
 void min_heapify_up(uint64 *heap, int8 index)
 {
     if (index != 0)
@@ -81,13 +83,18 @@ void min_heapify_up(uint64 *heap, int8 index)
     }
 }
 
+// complexity: O(n log n)
 void top_down(uint64 *heap, uint8 size)
 {
     for (uint8 i = 0; i < size; i++)
-        // max_heapify_up(heap, i);
-        min_heapify_up(heap, i);
+        max_heapify_up(heap, i);
+    // min_heapify_up(heap, i);
 }
 
+// complexity: O(log n)
+// same as max_heapify_up
+// ignoring the complexity of copying the array
+// assume that the size of the heap large enough to hold the new value
 uint64 *heap_insert(uint64 *heap, uint8 size, uint64 value)
 {
     uint64 *new_heap = (uint64 *)malloc((size + 1) * sizeof(uint64));
@@ -101,6 +108,7 @@ uint64 *heap_insert(uint64 *heap, uint8 size, uint64 value)
     return new_heap;
 }
 
+// complexity: O(log n)
 void delete_root(uint64 *heap, uint8 size)
 {
     swap(&heap[0], &heap[size - 1]);
@@ -112,7 +120,7 @@ void heap_sort(uint64 *heap, uint8 size)
 {
     bottom_up(heap, size);
     // top_down(heap, size);
-    while (size > 0)
+    while (size > 1)
         delete_root(heap, size--);
 }
 
@@ -134,4 +142,26 @@ node *construct_heap(uint64 *heap, uint8 size)
         }
     }
     return root;
+}
+
+uint8 mostFrequent(uint64 *heap, uint8 size)
+{
+    bottom_up(heap, size);
+    uint8 count = 1;
+    uint8 max = 1;
+    while (size > 1)
+    {
+        swap(&heap[0], &heap[size - 1]);
+        if (heap[0] == heap[size - 1])
+        {
+            count++;
+            if (count > max)
+                max = count;
+        }
+        else
+            count = 1;
+        max_heapify_bottom(heap, size - 1, 0);
+        size--;
+    }
+    return max;
 }

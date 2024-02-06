@@ -17,7 +17,7 @@ queue *queue_init(uint8 size)
     return q;
 }
 
-uint8 isEmpty(queue *q)
+uint8 isEmpty_queue(queue *q)
 {
     if (q->front == NULL)
         return 1;
@@ -28,7 +28,7 @@ uint8 isEmpty(queue *q)
 void enqueue(queue *q, uint64 value)
 {
     node *n = create_node(value);
-    if (isEmpty(q))
+    if (isEmpty_queue(q))
     {
         q->front = n;
         q->rear = n;
@@ -42,7 +42,7 @@ void enqueue(queue *q, uint64 value)
 
 uint64 dequeue(queue *q)
 {
-    if (isEmpty(q))
+    if (isEmpty_queue(q))
     {
         printf("Queue is empty\n");
         return -1;
@@ -52,7 +52,7 @@ uint64 dequeue(queue *q)
         uint64 value = q->front->data;
         node *d = q->front;
         q->front = q->front->next;
-        if (isEmpty(q))
+        if (isEmpty_queue(q))
             q->rear = NULL;
         free(d);
         return value;

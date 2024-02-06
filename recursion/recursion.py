@@ -11,12 +11,6 @@ def reverseString(s):
     return reverseString(s[1:]) + s[0]
 
 
-def decimalToBinary(num):
-    if num == 0:
-        return ""
-    return decimalToBinary(num // 2) + str(num % 2)
-
-
 def sumNaturalNumbers(num):
     if num == 0:
         return 0

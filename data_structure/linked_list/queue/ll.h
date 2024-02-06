@@ -1,3 +1,5 @@
+#include "../stack/ll.h"
+
 typedef unsigned long uint64;
 typedef unsigned int uint32;
 typedef unsigned short uint16;
@@ -21,6 +23,6 @@ typedef struct
 
 node *create_node(uint64 value);
 queue *queue_init(uint8 size);
-uint8 isEmpty(queue *q);
+uint8 isEmpty_queue(queue *q);
 void enqueue(queue *q, uint64 value);
 uint64 dequeue(queue *q);

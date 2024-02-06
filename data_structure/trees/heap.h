@@ -1,3 +1,4 @@
+#pragma once
 #include "trees.h"
 
 int8 left_index(int8 index);
@@ -13,3 +14,4 @@ uint64 *heap_insert(uint64 *heap, uint8 size, uint64 value);
 void delete_root(uint64 *heap, uint8 size);
 void heap_sort(uint64 *heap, uint8 size);
 node *construct_heap(uint64 *heap, uint8 size);
+uint8 mostFrequent(uint64 *heap, uint8 size);

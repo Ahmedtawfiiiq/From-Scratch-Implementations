@@ -1,3 +1,5 @@
+#pragma once
+
 typedef unsigned long uint64;
 typedef unsigned int uint32;
 typedef unsigned short uint16;
@@ -24,7 +26,7 @@ uint8 isFullStack(stack *s);
 uint8 top(stack *s);
 
 void displayStack(stack *s, uint8 maxSize);
-uint8 count(stack *s, uint8 maxSize);
+uint8 countStack(stack *s, uint8 maxSize);
 uint8 sum(stack *s, uint8 maxSize);
 void deleteAt(stack *s, uint8 k, uint8 maxSize);
 void pushSorted(stack *s, uint8 value, uint8 maxSize);
@@ -32,10 +34,14 @@ void pushSorted(stack *s, uint8 value, uint8 maxSize);
 uint8 isSumEqual(stack *s, uint8 maxSize);
 uint8 isPalindrome(uint8 *str);
 uint8 *decimalToBinary(uint8 n);
-stack* sort(stack *s1, stack* s2);
+stack *sort(stack *s1, stack *s2);
 
 // check priority of the given operator
 uint8 priority(uint8 symbol);
 uint8 *infixToPostfix(uint8 *infix);
 // evaluate postfix expression
+uint8 power(uint8 a, uint8 b);
 uint8 evaluatePostfix(uint8 *postfix);
+
+// balanced parenthesis
+uint8 isBalanced(uint8 *p);

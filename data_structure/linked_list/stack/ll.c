@@ -15,7 +15,7 @@ stack *stack_init(uint8 size)
     return s;
 }
 
-uint8 isEmpty(stack *s)
+uint8 isEmpty_stack(stack *s)
 {
     if (s->top == NULL)
         return 1;
@@ -26,7 +26,7 @@ uint8 isEmpty(stack *s)
 void push(stack *s, uint64 value)
 {
     node *n = create_node(value);
-    if (isEmpty(s))
+    if (isEmpty_stack(s))
         s->top = n;
     else
     {
@@ -37,7 +37,7 @@ void push(stack *s, uint64 value)
 
 uint64 pop(stack *s)
 {
-    if (!isEmpty(s))
+    if (!isEmpty_stack(s))
     {
         uint64 value = s->top->data;
         node *d = s->top;

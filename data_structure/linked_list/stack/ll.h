@@ -23,6 +23,6 @@ typedef struct
 
 node *create_node(uint64 value);
 stack *stack_init(uint8 size);
-uint8 isEmpty(stack *s);
+uint8 isEmpty_stack(stack *s);
 void push(stack *s, uint64 value);
 uint64 pop(stack *s);
