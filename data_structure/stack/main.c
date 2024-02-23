@@ -74,6 +74,9 @@ int main()
     // printf("%s\n", postfix);
     // uint8 *postfix = "723*-4^93/+";
     // printf("%d\n", evaluatePostfix(postfix));
+    // uint8 *infix = "(6-2)+3+5*4/(2)";
+    // uint8 *postfix = infixToPostfix(infix);
+    // printf("%d\n", evaluatePostfix(postfix));
 
     // two sorted stacks
     // with minimum on top
@@ -92,10 +95,15 @@ int main()
     // displayStack(s, 100);
 
     // balanced parenthesis
-    uint8 *p = "(([{}]()))";
-    if (isBalanced(p))
-        printf("Balanced\n");
-    else
-        printf("Not balanced\n");
+    // uint8 *p = "(([{}]()))";
+    // uint8 *p = "[()]{}{[()()]()}";
+    // uint8 *p = "(((3+4)))*(5-7)+(2^(8))";
+    // uint8 *p ="9+7*(12-61))";
+    // uint8 *p = "(4-(1*6)4)--5+5*((1))";
+    // uint8 *p = "((((2)(((4)))";
+    // if (isBalanced(p))
+    //     printf("Balanced\n");
+    // else
+    //     printf("Not balanced\n");
     return 0;
 }

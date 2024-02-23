@@ -7,7 +7,6 @@ def reverseString(s):
     # there is only one character in the string
     if len(s) == 0:
         return ""
-
     return reverseString(s[1:]) + s[0]
 
 
@@ -54,19 +53,6 @@ def isPalindrome3(s):
             i += 1
             j -= 1
     return True
-
-
-def getSequences(arr, i):
-    # base case
-    if i == len(arr):
-        return [[]]
-    # recursive case
-    sequences = getSequences(arr, i + 1)
-    result = []
-    for seq in sequences:
-        result.append(seq)
-        result.append([arr[i]] + seq)
-    return result
 
 
 def power(x, n):

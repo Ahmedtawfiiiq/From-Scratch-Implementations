@@ -1,14 +1,14 @@
-def insertionSort(array):
-    for i in range(1, len(array)):
-        current = array[i]
-        j = i - 1
-        while j >= 0 and array[j] > current:
-            array[j + 1] = array[j]
+def insertionSort(arr):
+    n = len(arr)
+    for i in range(1, n):
+        j = i
+        while arr[j] < arr[j - 1]:
+            arr[j], arr[j - 1] = arr[j - 1], arr[j]
             j -= 1
-        array[j + 1] = current
-    return array
+            if j == 0:
+                break
 
 
-unsorted = [3, 5, 4, 3, 2, 1]
-sorted = insertionSort(unsorted)
-print(sorted)
+arr = [3, 5, 4, 3, 2, 1]
+insertionSort(arr)
+print(arr)

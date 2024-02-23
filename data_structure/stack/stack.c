@@ -356,7 +356,7 @@ uint8 isBalanced(uint8 *p)
     {
         if (p[i] == '(' || p[i] == '[' || p[i] == '{')
             push(s, p[i]);
-        else
+        else if (p[i] == ')' || p[i] == ']' || p[i] == '}')
         {
             if (isEmptyStack(s))
                 return 0;

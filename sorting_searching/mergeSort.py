@@ -1,44 +1,33 @@
-
-def mergeSort(array):
-    if len(array) <= 1:
-        return array
-
-    mid = len(array) // 2
-
-    left = mergeSort(array[:mid])
-    right = mergeSort(array[mid:])
-
-    return merge(left, right)
-
-
-def merge(left, right):
-    i = 0
-    j = 0
-    k = 0
+def merge(arr, left, mid, right):
     temp = []
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            temp.append(left[i])
+    i = left
+    j = mid + 1
+    while i <= mid and j <= right:
+        if arr[i] <= arr[j]:
+            temp.append(arr[i])
             i += 1
-            k += 1
         else:
-            temp.append(right[j])
+            temp.append(arr[j])
             j += 1
-            k += 1
-
-    while i < len(left):
-        temp.append(left[i])
+    while i <= mid:
+        temp.append(arr[i])
         i += 1
-        k += 1
-
-    while j < len(right):
-        temp.append(right[j])
+    while j <= right:
+        temp.append(arr[j])
         j += 1
-        k += 1
+    for i in range(left, right + 1):
+        arr[i] = temp[i - left]
 
-    return temp
+
+def mergeSort(arr, l, r):
+    if l < r:
+        mid = (l + r) // 2
+        mergeSort(arr, l, mid)
+        mergeSort(arr, mid + 1, r)
+        merge(arr, l, r)
 
 
-# unsorted arr
-x  = [8, 4, 2, 5, 1, 3, 7, 6]
-print(mergeSort(x))
+arr = [8, 4, 2, 5, 1, 3, 7, 6]
+n = len(arr)
+mergeSort(arr, 0, n - 1)
+print(arr)

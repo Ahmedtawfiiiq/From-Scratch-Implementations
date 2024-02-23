@@ -269,16 +269,22 @@ int main()
     // printf("result: %d\n", result);
 
     // binary search trees with strings
-    stringNode *root = NULL;
-    root = insert_string(root, "ahmad");
-    root = insert_string(root, "baher");
-    root = insert_string(root, "ciao");
-    root = insert_string(root, "d");
-    root = insert_string(root, "eagle");
-    root = insert_string(root, "fawzi");
-    root = insert_string(root, "zein");
+    // stringNode *root = NULL;
+    // root = insert_string(root, "ahmad");
+    // root = insert_string(root, "baher");
+    // root = insert_string(root, "ciao");
+    // root = insert_string(root, "d");
+    // root = insert_string(root, "eagle");
+    // root = insert_string(root, "fawzi");
+    // root = insert_string(root, "zein");
 
-    in_order_string(root); // left root right
-    printf("\n");
+    // in_order_string(root); // left root right
+    // printf("\n");
+
+    // test
+    uint64 data[] = {5, 6, 8, 9, 11, 15, 17};
+    uint8 size = sizeof(data) / sizeof(*data);
+    float median = getMedian(data, size, 21);
+    printf("%.2f\n", median);
     return 0;
 }

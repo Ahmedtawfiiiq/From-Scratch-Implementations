@@ -1,9 +1,14 @@
-def selectionSort(array):
-    for i in range(len(array)):  # 0 -> n-1
+# in-place
+def selectionSort(arr):
+    n = len(arr)  # n = 5
+    for i in range(n - 1):  # i:0->3
         min = i
-        for j in range(i, len(array)):
-            if array[j] < array[min]:
+        for j in range(n - 1, i, -1):  # j:4->1
+            if arr[j] < arr[min]:
                 min = j
-        array[i], array[min] = array[min], array[i]
+        arr[i], arr[min] = arr[min], arr[i]
 
-    return array
+
+arr = [8, 2, 4, 1, 3]
+selectionSort(arr)
+print(arr)
