@@ -49,7 +49,5 @@ def count_primes(n):
 # c = count_primes(x)
 # print(c)
 
-from math import factorial
-
 n = 10
 # print(prime_factorization(factorial(n)))

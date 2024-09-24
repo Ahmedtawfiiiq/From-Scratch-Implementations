@@ -58,6 +58,11 @@
         "scll.h": "c",
         "stdlib.h": "c",
         "stack.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "filesystem": "cpp"
     }
 }

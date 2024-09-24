@@ -59,26 +59,27 @@ class MLP:
 
 
 # example 1
-# input = np.array([[0.35, 0.9]]).T
-# target = np.array([[0.5]]).T
-# wh = np.array([[0.1, 0.4], [0.8, 0.6]])
-# wo = np.array([[0.3, 0.9]]).T
-# bh = np.array([[0, 0]]).T
-# bo = np.array([[0]]).T
-# learning_rate = 1
+input = np.array([[0.35, 0.9]]).T
+target = np.array([[0.5]]).T
+wh = np.array([[0.1, 0.4], [0.8, 0.6]])
+wo = np.array([[0.3, 0.9]]).T
+bh = np.array([[0, 0]]).T
+bo = np.array([[0]]).T
+learning_rate = 1
 
 # example 2
-input = np.array([[1, 0, 1]]).T
-target = np.array([[1]]).T
-wh = np.array([[0.2, -0.3], [0.4, 0.1], [-0.5, 0.2]])
-wo = np.array([[-0.3, -0.2]]).T
-bh = np.array([[-0.4, 0.2]]).T
-bo = np.array([[0.1]]).T
-learning_rate = 0.9
+# input = np.array([[1, 0, 1]]).T
+# target = np.array([[1]]).T
+# wh = np.array([[0.2, -0.3], [0.4, 0.1], [-0.5, 0.2]])
+# wo = np.array([[-0.3, -0.2]]).T
+# bh = np.array([[-0.4, 0.2]]).T
+# bo = np.array([[0.1]]).T
+# learning_rate = 0.9
 
-# model = MLP(input, target, learning_rate, wh, wo, bh, bo)
-# model.train(2)
+model = MLP(input, target, learning_rate, wh, wo, bh, bo)
+model.train(1)
 # print(model.o)
+# print(model.z)
 # print(model.wh)
 # print(model.wo)
 # print(model.bh)

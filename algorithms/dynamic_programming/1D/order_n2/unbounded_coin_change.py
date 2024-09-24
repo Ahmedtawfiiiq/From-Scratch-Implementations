@@ -16,10 +16,28 @@ def bottom_up_coin_change(coins, amount):
             if j - coin >= 0:
                 q = min(q, 1 + n[j - coin])
         n[j] = q
-    return n[amount]
+    # generate the solution
+    solution = []
+    while amount > 0:
+        for coin in coins:
+            if amount - coin >= 0 and n[amount] == 1 + n[amount - coin]:
+                solution.append(coin)
+                amount -= coin
+                break
+    return solution, n[-1]
+
+def nWaysCoinChange(coins, amount):
+    n = [0 for _ in range(amount + 1)]
+    n[0] = 1
+    for coin in coins:
+        for j in range(coin, amount + 1):
+            n[j] += n[j - coin]
+    print(n)
+    return n[-1]
 
 
-coins = [1, 3, 4]
-amount = 6
-print(fun(coins, amount))
+coins = [1, 2, 5]
+amount = 5
+# print(fun(coins, amount))
 print(bottom_up_coin_change(coins, amount))
+print(nWaysCoinChange(coins, amount))
